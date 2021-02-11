@@ -9,6 +9,7 @@
 3. Redis
 4. Postgres DB
 5. Apache Kafka v2.7.0
+6. Server Sent Events
 
 ## Read More About,
 1. Springboot sleuth - https://spring.io/projects/spring-cloud-sleuth
@@ -38,52 +39,38 @@
 ./bin/windows/kafka-topics.bat --create --topic notification-topic --bootstrap-server localhost:9092
 ```
 
-## To create kafka-producer, Open new terminal and run following command
+## To start kafka-producer, Open new terminal and run following command
 ```
-./bin/windows/kafka-console-producer.bat --topic notification-topic --bootstrap-server localhost:9092
+.\bin\windows\kafka-console-producer.bat --topic notification-topic --bootstrap-server localhost:9092 --property "parse.key=true" --property "key.separator=:"
+```
+
+## Redis Download
+```
+1. Download redis from following link - https://redis.io/download
+2. Extract the redis and set the path to Environment variables
+3. Open the terminal and run - redis-server
 ```
 
 ## To start the application
 ```
-1. git clone git@github.com:NirakhRastogi/Springboot-Sleuth-Zipkin.git
-2. cd Springboot-Sleuth-Zipkin
+1. git@github.com:NirakhRastogi/Notification-System.git
+2. cd Notification-System
 3. Run all the applications
 ```
 
 # Endpoints
-## Create Order
+## To register a user
 ```
-POST/ http://localhost:8080/order/
+GET http://localhost:8080/notification-service/user/register/${userId}
+```
+This will start the event stream with notification service, so all the notifications will come to this particular user in real time.
 
-Body - 
-{
-    "customerName": "TestCustomer",
-    "deliveryAddress": "TestAddress",
-    "deliveryPhoneNumber": 8899887788,
-    "orderStatus": "PLACED",
-    "paymentStatus": "INCOMPLETE",
-    "items": [
-        {
-            "id": "yu7yuyg",
-            "name": "Item1",
-            "price": 78.5,
-            "quantity": 7
-        }
-    ]
-}
+## To publish notification publish following message
+### To send notification only, (userId is user1)
 ```
-
-## Track Order
+user1:[{"userId":"user1","message":"This is test notification","data":"Test Notification"}]
 ```
-GET/ http://localhost:8082/order-tracking/{orderId}
+### To send notification with mail, (userId is user1)
 ```
-
-## Change Order Status
-```
-GET/ http://localhost:8080/{orderId}/status/{status}
-```
-
-## Change Payment Status
-```
-GET/ http://localhost:8080/{orderId}/payment/status/{status}
+user1:[{"userId":"user1","message":"This is test notification","data":"Test Notification","mail":{"from":"TestUser <test@gmail.com>","cc":["testo@gmail.com"],"bcc":["testo@gmail.com"],"to":["testo@gmail.com"],"subject":"This is an test email","note":"Important Links ahaed","body":"<h1>Hi</h1><h2>Hello</h2>"}}]
 ```
