@@ -1,0 +1,14 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /notification-service
+
+postgres:
+  port: 5433
+  database: postgres
+  username: postgres
+  password: postgres
+  host: localhost
+
+endpoints:
+  notification-cache-service: http://localhost:8082/notification-system-cache

@@ -1,0 +1,10 @@
+server:
+  port: 8081
+
+kafka:
+  bootstrap-server: localhost:9092
+  topic-name: notification-topic
+
+endpoints:
+  notification-service: http://localhost:8080/notification-service
+  mail-service: http://localhost:9091/mail-api

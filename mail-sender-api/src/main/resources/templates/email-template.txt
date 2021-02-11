@@ -1,0 +1,12 @@
+<html>
+
+<head></head>
+
+<body>
+<div style="width:100%;padding:10px;background-color:rgba(180, 255, 163,.5);border:1px solid rgb(180, 255, 163); color:black;text-align:center; font-size:14px">
+    ${note}
+</div>
+${body}
+</body>
+
+</html>

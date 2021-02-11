@@ -1,0 +1,11 @@
+server:
+  port: 9091
+  servlet:
+    context-path: /mail-api
+
+mail:
+  username: test@gmail.com
+  password: test
+  smtp:
+    port: 587
+    host: smtp.gmail.com

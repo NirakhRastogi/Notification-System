@@ -1,0 +1,16 @@
+server:
+  port: 8082
+  servlet:
+    context-path: /notification-system-cache
+
+spring:
+  application:
+    name: notification-system-cache-service
+
+history:
+  time:
+    in-hours: 24
+
+notification:
+  cache:
+    invalidate: 0 0 0 * * ?
